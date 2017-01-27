@@ -1,0 +1,376 @@
+# depslib dependency file v1.0
+1393082358 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\matrixstack.c
+	<math.h>
+	<stdlib.h>
+	<stdio.h>
+	<GLFW/glfw3.h>
+	"matrixStack.h"
+
+1393060277 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\glfw\glfw3.h
+	<stddef.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<GLES3/gl3.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1393063648 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\matrixstack.h
+
+1393060278 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\pollrotator.c
+	<GLFW/glfw3.h>
+	<math.h>
+	"pollRotator.h"
+
+1393060278 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\pollrotator.h
+
+1393060277 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\trianglesoup.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.h"
+	"triangleSoup.h"
+
+1393060277 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\gl\glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1393060277 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\trianglesoup.h
+
+1424951463 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\glstack.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+	"Shader.hpp"
+	"Texture.hpp"
+	"TriangleSoup.hpp"
+	"Rotator.hpp"
+	"MatrixStack.hpp"
+
+1393525269 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\tnm061.hpp
+	<GL/glext.h>
+
+1393545772 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\shader.cpp
+	"Shader.hpp"
+
+1424951536 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\shader.hpp
+	<GLFW/glfw3.h>
+	"tnm061.hpp"
+	<cstdio>
+
+1393545884 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\texture.cpp
+	"Texture.hpp"
+
+1424951590 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\texture.hpp
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1393523446 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\tnm061.cpp
+	<stdio.h>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1393539361 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\rotator.cpp
+	"Rotator.hpp"
+
+1424951493 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\rotator.hpp
+	<GLFW/glfw3.h>
+	<cmath>
+
+1393545970 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\trianglesoup.cpp
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<string.h>
+	"TriangleSoup.hpp"
+
+1393545918 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\trianglesoup.hpp
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1393575327 source:d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\matrixstack.cpp
+	"MatrixStack.hpp"
+
+1424951522 d:\stefan\jobb_itn\kurser och kursmaterial\tnm061-svn-enzo\lab6-2014-c++\matrixstack.hpp
+	<cmath>
+	<cstdlib>
+	<cstdio>
+	<GLFW/glfw3.h>
+
+1456228605 source:c:\users\emmbr740\downloads\lab5-2016-cpp\matrixstack.cpp
+	"MatrixStack.hpp"
+
+1456228605 c:\users\emmbr740\downloads\lab5-2016-cpp\matrixstack.hpp
+	<cmath>
+	<cstdlib>
+	<cstdio>
+	<GLFW/glfw3.h>
+
+1456228605 c:\users\emmbr740\downloads\lab5-2016-cpp\glfw\glfw3.h
+	<stddef.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<GLES3/gl3.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1456228606 source:c:\users\emmbr740\downloads\lab5-2016-cpp\rotator.cpp
+	"Rotator.hpp"
+
+1456228606 c:\users\emmbr740\downloads\lab5-2016-cpp\rotator.hpp
+	<GLFW/glfw3.h>
+	<cmath>
+
+1456228606 source:c:\users\emmbr740\downloads\lab5-2016-cpp\shader.cpp
+	"Shader.hpp"
+
+1456228606 c:\users\emmbr740\downloads\lab5-2016-cpp\shader.hpp
+	<GLFW/glfw3.h>
+	"tnm061.hpp"
+	<cstdio>
+
+1456228607 c:\users\emmbr740\downloads\lab5-2016-cpp\tnm061.hpp
+	<GL/glext.h>
+
+1456228605 c:\users\emmbr740\downloads\lab5-2016-cpp\gl\glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1456228606 source:c:\users\emmbr740\downloads\lab5-2016-cpp\texture.cpp
+	"Texture.hpp"
+
+1456228606 c:\users\emmbr740\downloads\lab5-2016-cpp\texture.hpp
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1456228607 source:c:\users\emmbr740\downloads\lab5-2016-cpp\tnm061.cpp
+	<stdio.h>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1456228607 source:c:\users\emmbr740\downloads\lab5-2016-cpp\trianglesoup.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	"TriangleSoup.hpp"
+
+1456228607 c:\users\emmbr740\downloads\lab5-2016-cpp\trianglesoup.hpp
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1456234822 source:c:\users\emma\google drive\tnm061\lab5 - opengl\glstack.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+	"Shader.hpp"
+	"Texture.hpp"
+	"TriangleSoup.hpp"
+	"Rotator.hpp"
+	"MatrixStack.hpp"
+
+1456234853 c:\users\emma\google drive\tnm061\lab5 - opengl\glfw\glfw3.h
+	<stddef.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<GLES3/gl3.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1456234852 c:\users\emma\google drive\tnm061\lab5 - opengl\gl\glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1456234838 c:\users\emma\google drive\tnm061\lab5 - opengl\tnm061.hpp
+	<GL/glext.h>
+
+1456234833 c:\users\emma\google drive\tnm061\lab5 - opengl\shader.hpp
+	<GLFW/glfw3.h>
+	"tnm061.hpp"
+	<cstdio>
+
+1456234836 c:\users\emma\google drive\tnm061\lab5 - opengl\texture.hpp
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1456234842 c:\users\emma\google drive\tnm061\lab5 - opengl\trianglesoup.hpp
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1456234832 c:\users\emma\google drive\tnm061\lab5 - opengl\rotator.hpp
+	<GLFW/glfw3.h>
+	<cmath>
+
+1456234829 c:\users\emma\google drive\tnm061\lab5 - opengl\matrixstack.hpp
+	<cmath>
+	<cstdlib>
+	<cstdio>
+	<GLFW/glfw3.h>
+
+1461577190 source:c:\users\emma\google drive\tnm061\lab5 - opengl\matrixstack.cpp
+	"MatrixStack.hpp"
+
+1461577194 source:c:\users\emma\google drive\tnm061\lab5 - opengl\rotator.cpp
+	"Rotator.hpp"
+
+1456234833 source:c:\users\emma\google drive\tnm061\lab5 - opengl\shader.cpp
+	"Shader.hpp"
+
+1456234835 source:c:\users\emma\google drive\tnm061\lab5 - opengl\texture.cpp
+	"Texture.hpp"
+
+1456234837 source:c:\users\emma\google drive\tnm061\lab5 - opengl\tnm061.cpp
+	<stdio.h>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1456234839 source:c:\users\emma\google drive\tnm061\lab5 - opengl\trianglesoup.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	"TriangleSoup.hpp"
+
+1485521586 source:c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\glstack.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+	"Shader.hpp"
+	"Texture.hpp"
+	"TriangleSoup.hpp"
+	"Rotator.hpp"
+	"MatrixStack.hpp"
+
+1485520822 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\glfw\glfw3.h
+	<stddef.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<GLES3/gl3.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1485520823 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\gl\glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1485520821 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\tnm061.hpp
+	<GL/glext.h>
+
+1485520822 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\shader.hpp
+	<GLFW/glfw3.h>
+	"tnm061.hpp"
+	<cstdio>
+
+1485520822 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\texture.hpp
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1485520822 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\trianglesoup.hpp
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1485520822 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\rotator.hpp
+	<GLFW/glfw3.h>
+	<cmath>
+
+1485520822 c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\matrixstack.hpp
+	<cmath>
+	<cstdlib>
+	<cstdio>
+	<GLFW/glfw3.h>
+
+1485520821 source:c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\matrixstack.cpp
+	"MatrixStack.hpp"
+
+1485520822 source:c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\rotator.cpp
+	"Rotator.hpp"
+
+1485520821 source:c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\shader.cpp
+	"Shader.hpp"
+
+1485520822 source:c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\texture.cpp
+	"Texture.hpp"
+
+1485520822 source:c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\tnm061.cpp
+	<stdio.h>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1485520822 source:c:\users\emma\dropbox\plugg\tnm085 modelleringsprojekt\lab5 - opengl\trianglesoup.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	"TriangleSoup.hpp"
+
