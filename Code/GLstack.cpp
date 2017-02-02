@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
 
     // Read the texture data from file and upload it to the GPU
 	earthTexture.createTexture("textures/earth.tga");
-	sunTexture.createTexture("textures/orangeLeaf.tga");
+	sunTexture.createTexture("textures/Cyclamen_tile.tga");
 	moonTexture.createTexture("textures/moon.tga");
 
 	location_MV = glGetUniformLocation( earthShader.programID, "MV" );
@@ -229,7 +229,8 @@ int main(int argc, char *argv[]) {
 
                 // One leaf
                 MVstack.rotY(time);
-                MVstack.translate(0.0f, 1.0f, 0.0f);
+                MVstack.translate(0.0f, -time, 0.0f);
+                //MVstack.translate(0.0f, 1.0f, 0.0f);
                 glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
                 // Render the geometry to draw the sun
                 glBindTexture(GL_TEXTURE_2D, sunTexture.texID);
