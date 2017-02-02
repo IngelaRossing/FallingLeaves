@@ -89,7 +89,7 @@ void setupViewport(GLFWwindow *window, GLfloat *P) {
  */
 int main(int argc, char *argv[]) {
 
-	TriangleSoup earthSphere;
+	TriangleSoup leaf;
     Texture earthTexture;
     Texture sunTexture;
     Texture moonTexture;
@@ -158,17 +158,22 @@ int main(int argc, char *argv[]) {
     MVstack.init();
 
 	// Create geometry for rendering
-	earthSphere.createSphere(1.0, 30);
+	leaf.createBox(0.2f, 0.2f, 0.00001f);
 	// soupReadOBJ(&myShape, MESHFILENAME);
-	earthSphere.printInfo();
+	leaf.printInfo();
 
 	// Create a shader program object from GLSL code in two files
 	earthShader.createShader("vertexshader.glsl", "fragmentshader.glsl");
 
 	glEnable(GL_TEXTURE_2D);
+
+	//Enable blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     // Read the texture data from file and upload it to the GPU
 	earthTexture.createTexture("textures/earth.tga");
-	sunTexture.createTexture("textures/sun.tga");
+	sunTexture.createTexture("textures/orangeLeaf.tga");
 	moonTexture.createTexture("textures/moon.tga");
 
 	location_MV = glGetUniformLocation( earthShader.programID, "MV" );
@@ -187,7 +192,7 @@ int main(int argc, char *argv[]) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glEnable(GL_DEPTH_TEST); // Use the Z buffer
-		glEnable(GL_CULL_FACE);  // Use back face culling
+		glDisable(GL_CULL_FACE);  // Use back face culling
 		glCullFace(GL_BACK);
 
         // Set up the viewport
@@ -222,32 +227,13 @@ int main(int argc, char *argv[]) {
             // Then, do the model transformations ("object motion")
             MVstack.push(); // Save the current matrix on the stack
 
-                // Sun
+                // One leaf
                 MVstack.rotY(time);
-                MVstack.rotX(-M_PI/2); // Orient the poles along Y axis instead of Z
-                MVstack.scale(0.5f); // Scale unit sphere to radius 0.5
-                // Update the transformation matrix in the shader
+                MVstack.translate(0.0f, 1.0f, 0.0f);
                 glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
                 // Render the geometry to draw the sun
                 glBindTexture(GL_TEXTURE_2D, sunTexture.texID);
-                earthSphere.render();
-
-            MVstack.pop(); // Restore the matrix we saved above
-
-            // Earth
-            MVstack.rotY(0.2f*time); // Earth orbit rotation
-            MVstack.translate(1.0f, 0.0f, 0.0f); // Earth orbit radius
-
-            MVstack.push(); // Save the matrix before the Earth's rotation
-
-                MVstack.rotY(10.0f*time); // Earth's rotation around its axis
-                MVstack.rotX(-M_PI/2); // Orient the poles along Y axis instead of Z
-                MVstack.scale(0.2f); // Scale unit sphere to radius 0.1
-                // Update the transformation matrix in the shader
-                glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
-                // Render the geometry to draw the sun
-                glBindTexture(GL_TEXTURE_2D, earthTexture.texID);
-                earthSphere.render();
+                leaf.render();
 
             MVstack.pop(); // Restore the matrix we saved above
 

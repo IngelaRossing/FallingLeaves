@@ -374,3 +374,93 @@
 	<cstring>
 	"TriangleSoup.hpp"
 
+1486039082 source:c:\users\emma\documents\github\fallingleaves\code\glstack.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+	"Shader.hpp"
+	"Texture.hpp"
+	"TriangleSoup.hpp"
+	"Rotator.hpp"
+	"MatrixStack.hpp"
+
+1485520822 c:\users\emma\documents\github\fallingleaves\code\glfw\glfw3.h
+	<stddef.h>
+	<OpenGL/gl3.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/glcorearb.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<GLES3/gl3.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1485520823 c:\users\emma\documents\github\fallingleaves\code\gl\glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1485520821 c:\users\emma\documents\github\fallingleaves\code\tnm061.hpp
+	<GL/glext.h>
+
+1485520822 c:\users\emma\documents\github\fallingleaves\code\shader.hpp
+	<GLFW/glfw3.h>
+	"tnm061.hpp"
+	<cstdio>
+
+1485520822 c:\users\emma\documents\github\fallingleaves\code\texture.hpp
+	<GLFW/glfw3.h>
+	<cstdio>
+	<cstring>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1485520822 c:\users\emma\documents\github\fallingleaves\code\trianglesoup.hpp
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1485520822 c:\users\emma\documents\github\fallingleaves\code\rotator.hpp
+	<GLFW/glfw3.h>
+	<cmath>
+
+1485520822 c:\users\emma\documents\github\fallingleaves\code\matrixstack.hpp
+	<cmath>
+	<cstdlib>
+	<cstdio>
+	<GLFW/glfw3.h>
+
+1485520821 source:c:\users\emma\documents\github\fallingleaves\code\matrixstack.cpp
+	"MatrixStack.hpp"
+
+1485520822 source:c:\users\emma\documents\github\fallingleaves\code\rotator.cpp
+	"Rotator.hpp"
+
+1485520821 source:c:\users\emma\documents\github\fallingleaves\code\shader.cpp
+	"Shader.hpp"
+
+1485520822 source:c:\users\emma\documents\github\fallingleaves\code\texture.cpp
+	"Texture.hpp"
+
+1485520822 source:c:\users\emma\documents\github\fallingleaves\code\tnm061.cpp
+	<stdio.h>
+	<GLFW/glfw3.h>
+	<GL/glext.h>
+	"tnm061.hpp"
+
+1486036964 source:c:\users\emma\documents\github\fallingleaves\code\trianglesoup.cpp
+	<cstdio>
+	<cstdlib>
+	<cmath>
+	<cstring>
+	"TriangleSoup.hpp"
+
