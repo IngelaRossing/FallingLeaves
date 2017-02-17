@@ -20,10 +20,13 @@
  * This code is in the public domain.
  */
 
+using namespace std;
+
 // System utilities
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 
 #ifndef M_PI
 #define M_PI (3.141592653589793)
@@ -90,10 +93,8 @@ void setupViewport(GLFWwindow *window, GLfloat *P) {
 int main(int argc, char *argv[]) {
 
 	TriangleSoup leaf;
-    Texture earthTexture;
-    Texture sunTexture;
-    Texture moonTexture;
-    Shader earthShader;
+    Texture leafTexture;
+    Shader leafShader;
 
  	GLint location_time, location_MV, location_P, location_tex; // Shader uniforms
     float time;
@@ -163,7 +164,7 @@ int main(int argc, char *argv[]) {
 	leaf.printInfo();
 
 	// Create a shader program object from GLSL code in two files
-	earthShader.createShader("vertexshader.glsl", "fragmentshader.glsl");
+	leafShader.createShader("vertexshader.glsl", "fragmentshader.glsl");
 
 	glEnable(GL_TEXTURE_2D);
 
@@ -172,14 +173,25 @@ int main(int argc, char *argv[]) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Read the texture data from file and upload it to the GPU
-	earthTexture.createTexture("textures/earth.tga");
-	sunTexture.createTexture("textures/Cyclamen_tile.tga");
-	moonTexture.createTexture("textures/moon.tga");
+	leafTexture.createTexture("textures/Cyclamen_tile.tga");
 
-	location_MV = glGetUniformLocation( earthShader.programID, "MV" );
-	location_P = glGetUniformLocation( earthShader.programID, "P" );
-	location_time = glGetUniformLocation( earthShader.programID, "time" );
-	location_tex = glGetUniformLocation( earthShader.programID, "tex" );
+	location_MV = glGetUniformLocation( leafShader.programID, "MV" );
+	location_P = glGetUniformLocation( leafShader.programID, "P" );
+	location_time = glGetUniformLocation( leafShader.programID, "time" );
+	location_tex = glGetUniformLocation( leafShader.programID, "tex" );
+
+	/* NEEDED VARIABLES for simple fall in one dimension with drag (Euler) */
+	float oldVelocity = 0.0f;      //Starting values
+	float oldPosition = 10.0f;
+	float oldTime= 0.0f;
+	float newVelocity, newPosition, newTime;
+	float C = 0.9;              //Coefficient for air resistance
+	float rho = 1.3;           //Air density (kg/m^3)
+	float A = 0.01;            //Effective area (m^2)
+	float k = 0.5*C*rho*A;     //Air resistance constant
+	float m = 0.003;           //Mass of the leaf (kg)
+	float g = 9.82;            //Gravitational acceleration
+	float h = 0.01;            //Step length
 
     // Main loop
     while(!glfwWindowShouldClose(window))
@@ -203,7 +215,7 @@ int main(int argc, char *argv[]) {
 		//printf("phi = %6.2f, theta = %6.2f\n", rotator.phi, rotator.theta);
 
 		// Activate our shader program.
-		glUseProgram( earthShader.programID );
+		glUseProgram( leafShader.programID );
 
         // Copy the projection matrix P into the shader.
 		glUniformMatrix4fv( location_P, 1, GL_FALSE, P );
@@ -221,20 +233,46 @@ int main(int argc, char *argv[]) {
             // Modify MV according to user input
             // First, do the view transformations ("camera motion")
             MVstack.translate(0.0f, 0.0f, -5.0f);
+            MVstack.scale(0.2);
             MVstack.rotX(rotator.theta);
             MVstack.rotY(rotator.phi);
 
             // Then, do the model transformations ("object motion")
             MVstack.push(); // Save the current matrix on the stack
 
-                // One leaf
-                MVstack.rotY(time);
-                MVstack.translate(0.0f, -time, 0.0f);
-                //MVstack.translate(0.0f, 1.0f, 0.0f);
-                glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
-                // Render the geometry to draw the sun
-                glBindTexture(GL_TEXTURE_2D, sunTexture.texID);
-                leaf.render();
+                    /* Do necessary calculations (Euler)*/
+                    h = (time - oldTime);
+
+                    //cout << "h =" << h << endl;
+
+                    if(h < 0.15)
+                    {
+                        newVelocity = oldVelocity + ((k/m)*oldVelocity*oldVelocity - g)*h;
+                        newPosition = oldPosition + oldVelocity*h;
+
+                        //cout << newPosition << endl;        // <----For debugging
+
+                        if(round(newPosition) == 0)           // WHY DOES THE LEAF FALL SO FUCKING FAST!?
+                        {
+                            cout << time << endl;   //When does the leaf reach the ground?
+                        }
+
+                    }
+
+                    // One leaf (
+                    MVstack.rotY(time);
+                    MVstack.translate(0.0f, newPosition, 0.0f);
+                    glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
+                    // Render the geometry to draw the sun
+                    glBindTexture(GL_TEXTURE_2D, leafTexture.texID);
+                    leaf.render();
+
+                    /* Update variables for nest iteration */
+                    oldVelocity = newVelocity;
+                    oldPosition = newPosition;
+
+                    oldTime = time;
+
 
             MVstack.pop(); // Restore the matrix we saved above
 
