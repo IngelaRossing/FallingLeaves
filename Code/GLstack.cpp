@@ -182,7 +182,7 @@ int main(int argc, char *argv[]) {
 
 	/* NEEDED VARIABLES for simple fall in one dimension with drag (Euler) */
 	float oldVelocity = 0.0f;      //Starting values
-	float oldPosition = 10.0f;
+	float oldPosition = 5.0f;
 	float oldTime= 0.0f;
 	float newVelocity, newPosition, newTime;
 	float C = 0.9;              //Coefficient for air resistance
@@ -241,6 +241,7 @@ int main(int argc, char *argv[]) {
             MVstack.push(); // Save the current matrix on the stack
 
                     /* Do necessary calculations (Euler)*/
+
                     h = (time - oldTime);
 
                     //cout << "h =" << h << endl;
@@ -250,17 +251,16 @@ int main(int argc, char *argv[]) {
                         newVelocity = oldVelocity + ((k/m)*oldVelocity*oldVelocity - g)*h;
                         newPosition = oldPosition + oldVelocity*h;
 
-                        //cout << newPosition << endl;        // <----For debugging
-
-                        if(round(newPosition) == 0)           // WHY DOES THE LEAF FALL SO FUCKING FAST!?
-                        {
-                            cout << time << endl;   //When does the leaf reach the ground?
-                        }
-
+                        //When does the leaf reach the ground?
+                        if(round(newPosition) == 0)
+                            cout << time << endl;
                     }
+
+                    /* NOTE: För flera löv kommer det behövas en vektor eller array innehållande dess positioner och hastigheter */
 
                     // One leaf (
                     MVstack.rotY(time);
+                    MVstack.rotZ(0.2);  //Denna rotation gör så att lövet "singlar" ner
                     MVstack.translate(0.0f, newPosition, 0.0f);
                     glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
                     // Render the geometry to draw the sun
