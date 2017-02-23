@@ -374,7 +374,7 @@
 	<cstring>
 	"TriangleSoup.hpp"
 
-1487839992 source:c:\users\emma\documents\github\fallingleaves\code\glstack.cpp
+1487845068 source:c:\users\emma\documents\github\fallingleaves\code\glstack.cpp
 	<cstdio>
 	<cstdlib>
 	<cmath>
@@ -382,11 +382,9 @@
 	<GLFW/glfw3.h>
 	<GL/glext.h>
 	"tnm061.hpp"
-	"Shader.hpp"
 	"Texture.hpp"
-	"TriangleSoup.hpp"
 	"Rotator.hpp"
-	"MatrixStack.hpp"
+	"Leaf.h"
 
 1485520822 c:\users\emma\documents\github\fallingleaves\code\glfw\glfw3.h
 	<stddef.h>
@@ -464,4 +462,12 @@
 	<cmath>
 	<cstring>
 	"TriangleSoup.hpp"
+
+1487844737 c:\users\emma\documents\github\fallingleaves\code\leaf.h
+	"TriangleSoup.hpp"
+	"matrixStack.hpp"
+	"Shader.hpp"
+
+1487845261 source:c:\users\emma\documents\github\fallingleaves\code\leaf.cpp
+	"Leaf.h"
 

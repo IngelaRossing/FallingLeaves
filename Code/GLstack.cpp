@@ -55,11 +55,9 @@ using namespace std;
 
 // Headers for the other source files that make up this program.
 #include "tnm061.hpp"
-#include "Shader.hpp"
 #include "Texture.hpp"
-#include "TriangleSoup.hpp"
 #include "Rotator.hpp"
-#include "MatrixStack.hpp"
+#include "Leaf.h"
 
 /*
  * setupViewport() - set up the OpenGL viewport.
@@ -191,11 +189,6 @@ int main(int argc, char *argv[]) {
 	float oldAlpha = 0;            // The direction the leaf is moving (radians)
 	float oldAngle = 1;            // The leaf's orientation (radians)
 	float newU, newV, newX, newY, newTime, newAngVelocity, newAlpha, newAngle;
-//	float C = 0.9;              //Coefficient for air resistance
-//	float rho = 1.3;           //Air density (kg/m^3)
-//	float A = 0.01;            //Effective area (m^2)
-//	float k = 0.5*C*rho*A;     //Air resistance constant
-//	float m = 0.003;           //Mass of the leaf (kg)
 	float g = 9.82;            //Gravitational acceleration
 	float h = 0.01;            //Step length
 
@@ -204,6 +197,8 @@ int main(int argc, char *argv[]) {
     float kort = 10;    // Ortogonal friction
     float kpar = 0.1;  // Parallel friction
     float lang = 0.07;
+
+    Leaf ourLeaf;
 
     // Main loop
     while(!glfwWindowShouldClose(window))
@@ -256,8 +251,7 @@ int main(int argc, char *argv[]) {
 
                     //cout << "h =" << h << endl; //What is the step length?
 
-                    if(h < 0.15)
-                    {
+
                         /* Do necessary calculations (Euler)*/
 
                         newU = oldU + (-(kort*sin(oldAngle)*sin(oldAngle) + kpar*cos(oldAngle)*cos(oldAngle))*oldU
@@ -265,7 +259,7 @@ int main(int argc, char *argv[]) {
                                 - M_PI*rho*(oldU*oldU + oldV*oldV)*cos(oldAlpha + oldAngle)*cos(oldAlpha))*h;
 
                         newV = oldV + ((kort - kpar)*sin(oldAngle)*cos(oldAngle)*oldU
-                                - (kort*sin(oldAngle)*sin(oldAngle) + kpar*cos(oldAngle)*cos(oldAngle))*oldV
+                                - (kort*cos(oldAngle)*cos(oldAngle) + kpar*sin(oldAngle)*sin(oldAngle))*oldV
                                 + M_PI*rho*(oldU*oldU + oldV*oldV)*cos(oldAlpha + oldAngle)*sin(oldAlpha) - g)*h;
 
                         newAlpha = atan(newU/newV); // New movement direction
@@ -285,18 +279,18 @@ int main(int argc, char *argv[]) {
                         //When does the leaf reach the ground?
                         if(round(newY) == 0)
                             cout << time << endl;
-                    }
+
 
                     /* NOTE: För flera löv kommer det behövas en vektor eller array innehållande dess positioner och hastigheter */
 
                     // One leaf (
-                    MVstack.rotY(time);
-                    MVstack.rotX(0.2);  //Denna rotation gör så att lövet "singlar" ner
+                    MVstack.rotY(time);     //Denna rotation gör så att lövet "singlar" ner
+                    MVstack.rotX(0.4);
                     MVstack.translate(newX, newY, 0.0f);
                     MVstack.rotZ(newAngle);
-                    glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
-                    // Render the geometry to draw the sun
+
                     glBindTexture(GL_TEXTURE_2D, leafTexture.texID);
+                    glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
                     leaf.render();
 
                     /* Update variables for nest iteration */
@@ -312,6 +306,10 @@ int main(int argc, char *argv[]) {
 
 
             MVstack.pop(); // Restore the matrix we saved above
+
+            //Draw our leaf class
+            ourLeaf.update(h);
+            ourLeaf.draw(MVstack, location_MV);
 
         MVstack.pop(); // Restore the initial, untouched matrix
 
