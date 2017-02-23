@@ -159,7 +159,7 @@ int main(int argc, char *argv[]) {
     MVstack.init();
 
 	// Create geometry for rendering
-	leaf.createBox(0.2f, 0.2f, 0.00001f);
+	leaf.createBox(0.3f, 0.3f, 0.00001f);
 	// soupReadOBJ(&myShape, MESHFILENAME);
 	leaf.printInfo();
 
@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Read the texture data from file and upload it to the GPU
-	leafTexture.createTexture("textures/Cyclamen_tile.tga");
+	leafTexture.createTexture("textures/testleaf3.tga");
 
 	location_MV = glGetUniformLocation( leafShader.programID, "MV" );
 	location_P = glGetUniformLocation( leafShader.programID, "P" );
@@ -181,17 +181,29 @@ int main(int argc, char *argv[]) {
 	location_tex = glGetUniformLocation( leafShader.programID, "tex" );
 
 	/* NEEDED VARIABLES for simple fall in one dimension with drag (Euler) */
-	float oldVelocity = 0.0f;      //Starting values
-	float oldPosition = 5.0f;
-	float oldTime= 0.0f;
-	float newVelocity, newPosition, newTime;
-	float C = 0.9;              //Coefficient for air resistance
-	float rho = 1.3;           //Air density (kg/m^3)
-	float A = 0.01;            //Effective area (m^2)
-	float k = 0.5*C*rho*A;     //Air resistance constant
-	float m = 0.003;           //Mass of the leaf (kg)
+	//Starting values
+	float oldU = 0.0f;      // u is the velocity in X
+    float oldV = 0.0f;      // v is the velocity in Y
+    float oldX = 0.0f;      // position x
+	float oldY = 5.0f;      // position y
+	float oldTime = 0.0f;
+	float oldAngVelocity = 0;
+	float oldAlpha = 0;            // The direction the leaf is moving (radians)
+	float oldAngle = 1;            // The leaf's orientation (radians)
+	float newU, newV, newX, newY, newTime, newAngVelocity, newAlpha, newAngle;
+//	float C = 0.9;              //Coefficient for air resistance
+//	float rho = 1.3;           //Air density (kg/m^3)
+//	float A = 0.01;            //Effective area (m^2)
+//	float k = 0.5*C*rho*A;     //Air resistance constant
+//	float m = 0.003;           //Mass of the leaf (kg)
 	float g = 9.82;            //Gravitational acceleration
 	float h = 0.01;            //Step length
+
+	//Values needed for rotation
+	float rho = 0.05;    // Value between 1 and 0. Relationship between leaf density and air density
+    float kort = 10;    // Ortogonal friction
+    float kpar = 0.1;  // Parallel friction
+    float lang = 0.07;
 
     // Main loop
     while(!glfwWindowShouldClose(window))
@@ -240,19 +252,38 @@ int main(int argc, char *argv[]) {
             // Then, do the model transformations ("object motion")
             MVstack.push(); // Save the current matrix on the stack
 
-                    /* Do necessary calculations (Euler)*/
-
                     h = (time - oldTime);
 
-                    //cout << "h =" << h << endl;
+                    //cout << "h =" << h << endl; //What is the step length?
 
                     if(h < 0.15)
                     {
-                        newVelocity = oldVelocity + ((k/m)*oldVelocity*oldVelocity - g)*h;
-                        newPosition = oldPosition + oldVelocity*h;
+                        /* Do necessary calculations (Euler)*/
+
+                        newU = oldU + (-(kort*sin(oldAngle)*sin(oldAngle) + kpar*cos(oldAngle)*cos(oldAngle))*oldU
+                                + (kort - kpar)*sin(oldAngle)*cos(oldAngle)*oldV
+                                - M_PI*rho*(oldU*oldU + oldV*oldV)*cos(oldAlpha + oldAngle)*cos(oldAlpha))*h;
+
+                        newV = oldV + ((kort - kpar)*sin(oldAngle)*cos(oldAngle)*oldU
+                                - (kort*sin(oldAngle)*sin(oldAngle) + kpar*cos(oldAngle)*cos(oldAngle))*oldV
+                                + M_PI*rho*(oldU*oldU + oldV*oldV)*cos(oldAlpha + oldAngle)*sin(oldAlpha) - g)*h;
+
+                        newAlpha = atan(newU/newV); // New movement direction
+
+                        newAngVelocity = oldAngVelocity +
+                                         (-kort*oldAngVelocity - (3*M_PI*rho*(oldU*oldU + oldV*oldV)/lang)*cos(oldAlpha + oldAngle)*sin(oldAlpha + oldAngle))*h;
+
+                        newAngle = oldAngle + oldAngVelocity*h;
+
+                        // The position becomes:
+                        newX = oldX + oldU*h;
+                        newY = oldY + oldV*h;
+
+                        cout << "x: " << newX << "  y: " << newY << endl;
+
 
                         //When does the leaf reach the ground?
-                        if(round(newPosition) == 0)
+                        if(round(newY) == 0)
                             cout << time << endl;
                     }
 
@@ -260,16 +291,22 @@ int main(int argc, char *argv[]) {
 
                     // One leaf (
                     MVstack.rotY(time);
-                    MVstack.rotZ(0.2);  //Denna rotation gör så att lövet "singlar" ner
-                    MVstack.translate(0.0f, newPosition, 0.0f);
+                    MVstack.rotX(0.2);  //Denna rotation gör så att lövet "singlar" ner
+                    MVstack.translate(newX, newY, 0.0f);
+                    MVstack.rotZ(newAngle);
                     glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
                     // Render the geometry to draw the sun
                     glBindTexture(GL_TEXTURE_2D, leafTexture.texID);
                     leaf.render();
 
                     /* Update variables for nest iteration */
-                    oldVelocity = newVelocity;
-                    oldPosition = newPosition;
+                    oldU = newU;
+                    oldV = newV;
+                    oldX = newX;
+                    oldY = newY;
+                    oldAlpha = newAlpha;
+                    oldAngVelocity = newAngVelocity;
+                    oldAngle = newAngle;
 
                     oldTime = time;
 
