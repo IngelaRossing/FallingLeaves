@@ -14,14 +14,14 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f), oldTheta(1
 	oldY = fRand(-5.0f, 10.0f);
     z    = fRand(-5.0f, 5.0f);
 
-    oldAlpha = fRand(-1.0f, 1.0f);
-    oldTheta = fRand(-1.0f, 1.0f);
-    rotZ = fRand(-M_PI/2, M_PI/2);
+    //oldAlpha = fRand(-1.0f, 1.0f);
+    oldTheta = fRand(0.7f, 1.1f);
+    rotZ = fRand(M_PI/2-1, M_PI/2);
 
 	//Values needed for rotation
-    kort = 8; //fRand(1.0f, 10.0f);    // Ortogonal friction
-    kpar = kort/100;     // Parallel friction
-    length = fRand(0.1f, 0.4f);
+    kort = 5; //fRand(1.0f, 10.0f);    // Ortogonal friction
+    kpar = kort/40;     // Parallel friction
+    length = 0.8f;
 
     mesh.createBox(0.5f, 0.5f, 0.00001f);
 }

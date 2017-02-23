@@ -28,6 +28,8 @@
 			<Add directory="./GLFW" />
 		</Linker>
 		<Unit filename="GLstack.cpp" />
+		<Unit filename="Leaf.cpp" />
+		<Unit filename="Leaf.h" />
 		<Unit filename="MatrixStack.cpp" />
 		<Unit filename="MatrixStack.hpp" />
 		<Unit filename="Rotator.cpp" />
