@@ -8,6 +8,8 @@
 #include "TriangleSoup.hpp"
 #include "matrixStack.hpp"
 #include "Shader.hpp"
+#include <ctime>
+#include <algorithm>    // std::min
 
 /* This is a class describing a single leaf */
 
@@ -18,12 +20,12 @@ class Leaf
         Leaf();
 
         void update(float h);
-        void draw(MatrixStack& mStack, GLint& location_MV);
+        void draw(MatrixStack& mStack, GLint& location_MV, float time);
 
     private:
         //Gravity and relative density are the same for all leaves
         const float g = 9.82;
-        const float RHO = 0.05;
+        const float RHO = 0.1;
 
         float length, kort, kpar;   // Characteristics of the leaf. kort - ortogonal friction, kpar - parallel friction
         float x, y, z, oldX, oldY;  // Leaf position
@@ -31,6 +33,7 @@ class Leaf
         float theta, oldTheta;      // Leaf orientation angle (radians)
         float omega, oldOmega;      // Angular velocity, derivative of theta
         float alpha, oldAlpha;      // The direction the leaf is traveling
+        float rotZ;                 // Starting angle for the leaf in z
 
         TriangleSoup mesh;
 };

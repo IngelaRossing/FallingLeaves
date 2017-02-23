@@ -25,8 +25,9 @@ using namespace std;
 // System utilities
 #include <cstdio>
 #include <cstdlib>
-#include <cmath>
 #include <iostream>
+#include <vector>
+#include <cmath>
 
 #ifndef M_PI
 #define M_PI (3.141592653589793)
@@ -97,6 +98,8 @@ int main(int argc, char *argv[]) {
  	GLint location_time, location_MV, location_P, location_tex; // Shader uniforms
     float time;
 	double fps = 0.0;
+	float h;
+	float oldTime = 0.0f;
 
     MatrixStack MVstack; // The matrix stack we are going to use to set MV
 
@@ -156,11 +159,6 @@ int main(int argc, char *argv[]) {
     // Intialize the matrix to an identity transformation
     MVstack.init();
 
-	// Create geometry for rendering
-	leaf.createBox(0.3f, 0.3f, 0.00001f);
-	// soupReadOBJ(&myShape, MESHFILENAME);
-	leaf.printInfo();
-
 	// Create a shader program object from GLSL code in two files
 	leafShader.createShader("vertexshader.glsl", "fragmentshader.glsl");
 
@@ -178,27 +176,9 @@ int main(int argc, char *argv[]) {
 	location_time = glGetUniformLocation( leafShader.programID, "time" );
 	location_tex = glGetUniformLocation( leafShader.programID, "tex" );
 
-	/* NEEDED VARIABLES for simple fall in one dimension with drag (Euler) */
-	//Starting values
-	float oldU = 0.0f;      // u is the velocity in X
-    float oldV = 0.0f;      // v is the velocity in Y
-    float oldX = 0.0f;      // position x
-	float oldY = 5.0f;      // position y
-	float oldTime = 0.0f;
-	float oldAngVelocity = 0;
-	float oldAlpha = 0;            // The direction the leaf is moving (radians)
-	float oldAngle = 1;            // The leaf's orientation (radians)
-	float newU, newV, newX, newY, newTime, newAngVelocity, newAlpha, newAngle;
-	float g = 9.82;            //Gravitational acceleration
-	float h = 0.01;            //Step length
-
-	//Values needed for rotation
-	float rho = 0.05;    // Value between 1 and 0. Relationship between leaf density and air density
-    float kort = 10;    // Ortogonal friction
-    float kpar = 0.1;  // Parallel friction
-    float lang = 0.07;
-
-    Leaf ourLeaf;
+    /* Here we put our classes :) */
+    const int NR_LEAVES = 100;
+    Leaf leaves[NR_LEAVES];
 
     // Main loop
     while(!glfwWindowShouldClose(window))
@@ -251,65 +231,22 @@ int main(int argc, char *argv[]) {
 
                     //cout << "h =" << h << endl; //What is the step length?
 
-
-                        /* Do necessary calculations (Euler)*/
-
-                        newU = oldU + (-(kort*sin(oldAngle)*sin(oldAngle) + kpar*cos(oldAngle)*cos(oldAngle))*oldU
-                                + (kort - kpar)*sin(oldAngle)*cos(oldAngle)*oldV
-                                - M_PI*rho*(oldU*oldU + oldV*oldV)*cos(oldAlpha + oldAngle)*cos(oldAlpha))*h;
-
-                        newV = oldV + ((kort - kpar)*sin(oldAngle)*cos(oldAngle)*oldU
-                                - (kort*cos(oldAngle)*cos(oldAngle) + kpar*sin(oldAngle)*sin(oldAngle))*oldV
-                                + M_PI*rho*(oldU*oldU + oldV*oldV)*cos(oldAlpha + oldAngle)*sin(oldAlpha) - g)*h;
-
-                        newAlpha = atan(newU/newV); // New movement direction
-
-                        newAngVelocity = oldAngVelocity +
-                                         (-kort*oldAngVelocity - (3*M_PI*rho*(oldU*oldU + oldV*oldV)/lang)*cos(oldAlpha + oldAngle)*sin(oldAlpha + oldAngle))*h;
-
-                        newAngle = oldAngle + oldAngVelocity*h;
-
-                        // The position becomes:
-                        newX = oldX + oldU*h;
-                        newY = oldY + oldV*h;
-
-                        cout << "x: " << newX << "  y: " << newY << endl;
-
-
-                        //When does the leaf reach the ground?
-                        if(round(newY) == 0)
-                            cout << time << endl;
-
-
                     /* NOTE: För flera löv kommer det behövas en vektor eller array innehållande dess positioner och hastigheter */
 
                     // One leaf (
-                    MVstack.rotY(time);     //Denna rotation gör så att lövet "singlar" ner
-                    MVstack.rotX(0.4);
-                    MVstack.translate(newX, newY, 0.0f);
-                    MVstack.rotZ(newAngle);
-
-                    glBindTexture(GL_TEXTURE_2D, leafTexture.texID);
-                    glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
-                    leaf.render();
-
-                    /* Update variables for nest iteration */
-                    oldU = newU;
-                    oldV = newV;
-                    oldX = newX;
-                    oldY = newY;
-                    oldAlpha = newAlpha;
-                    oldAngVelocity = newAngVelocity;
-                    oldAngle = newAngle;
 
                     oldTime = time;
+
+                    //Draw our leaf class
+                    for(int i = 0; i < NR_LEAVES; i++)
+                    {
+                       leaves[i].update(h);
+                       leaves[i].draw(MVstack, location_MV, time);
+                    }
 
 
             MVstack.pop(); // Restore the matrix we saved above
 
-            //Draw our leaf class
-            ourLeaf.update(h);
-            ourLeaf.draw(MVstack, location_MV);
 
         MVstack.pop(); // Restore the initial, untouched matrix
 

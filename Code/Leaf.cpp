@@ -1,17 +1,29 @@
 #include "Leaf.h"
 
+// Function to generate a random double value between two values
+float fRand(float fMin, float fMax)
+{
+    float f = (float)rand() / RAND_MAX;
+    return fMin + f * (fMax - fMin);
+}
+
+
 Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f), oldTheta(1.0f)
 {
-    oldX = 1.0f;      // these should be randoms
-	oldY = 5.0f;
-    z    = 0.0f;
+    oldX = fRand(-5.0f, 5.0f);      // these should be randoms
+	oldY = fRand(-5.0f, 10.0f);
+    z    = fRand(-5.0f, 5.0f);
+
+    oldAlpha = fRand(-1.0f, 1.0f);
+    oldTheta = fRand(-1.0f, 1.0f);
+    rotZ = fRand(-M_PI/2, M_PI/2);
 
 	//Values needed for rotation
-    kort = 10.0f;    // Ortogonal friction
-    kpar = 0.1f;     // Parallel friction
-    length = 0.07f;
+    kort = 8; //fRand(1.0f, 10.0f);    // Ortogonal friction
+    kpar = kort/100;     // Parallel friction
+    length = fRand(0.1f, 0.4f);
 
-    mesh.createBox(0.3f, 0.3f, 0.00001f);
+    mesh.createBox(0.5f, 0.5f, 0.00001f);
 }
 
 void Leaf::update(float h)
@@ -35,6 +47,14 @@ void Leaf::update(float h)
     x = oldX + oldU*h;
     y = oldY + oldV*h;
 
+
+    //If the leaf moves too far down, push it up again.
+    if(y < -10.0)
+    {
+        x = fRand(-7.0f, 7.0f);      // these should be randoms
+        y = fRand(8.0f, 10.0f);
+    }
+
     // Update variables for nest iteration
     oldU = u;
     oldV = v;
@@ -43,18 +63,23 @@ void Leaf::update(float h)
     oldAlpha = alpha;
     oldOmega = omega;
     oldTheta = theta;
+
 }
 
-void Leaf::draw(MatrixStack& mStack, GLint& location_MV)
+void Leaf::draw(MatrixStack& mStack, GLint& location_MV, float time)
 {
     mStack.push(); //Save the current matrix before performing multiplications
 
+
         mStack.rotX(0.4);
         mStack.translate(x, y, z);
+        //mStack.rotY(std::min(0.0f, (float)sin(time)));
         mStack.rotZ(theta);
+        mStack.rotZ(rotZ);
 
         glUniformMatrix4fv( location_MV, 1, GL_FALSE, mStack.getCurrentMatrix() );
         mesh.render(); //Draw the player
 
     mStack.pop(); //Restore the initial matrix
 }
+
