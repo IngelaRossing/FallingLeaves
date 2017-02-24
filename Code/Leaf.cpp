@@ -8,9 +8,9 @@ float fRand(float fMin, float fMax)
 }
 
 
-Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f)
+Leaf::Leaf(): oldU(0.0f), oldV(0.0001f), oldOmega(0.0f), oldAlpha(0.0f)         //Note: v cannot be zero!!
 {
-    oldX = fRand(-5.0f, 5.0f);      // these should be randoms
+    oldX = fRand(-7.0f, 7.0f);      // these should be randoms
 	oldY = fRand(-5.0f, 10.0f);
     z    = fRand(-5.0f, 5.0f);
 
@@ -28,15 +28,33 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f)
 
 void Leaf::update(float h)
 {
+    float condition = oldAlpha+oldTheta;    // This is used to handle whether t should be + or -
     float V2 = oldU*oldU + oldV*oldV; // The magnitude of the speed of the leaf ^2
 
-    u = oldU + (-(kort*sin(oldTheta)*sin(oldTheta) + kpar*cos(oldTheta)*cos(oldTheta))*oldU
-           + (kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldV
-           - M_PI*RHO*(V2)*cos(oldTheta + oldTheta)*cos(oldTheta))*h;
+    //Check condition
+    if(oldAlpha+oldTheta < M_PI || oldAlpha+oldTheta > M_PI)
+        condition = (float)fmod(oldAlpha+oldTheta, M_PI);
 
-    v = oldV + ((kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldU
-           - (kort*cos(oldTheta)*cos(oldTheta) + kpar*sin(oldTheta)*sin(oldTheta))*oldV
-           + M_PI*RHO*(V2)*cos(oldAlpha + oldTheta)*sin(oldAlpha) - g)*h;
+    if(oldV < 0 && condition > 0 && condition < M_PI || oldV > 0 && condition > -M_PI && condition < 0)
+    {
+        u = oldU + (-(kort*sin(oldTheta)*sin(oldTheta) + kpar*cos(oldTheta)*cos(oldTheta))*oldU
+            + (kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldV
+            - M_PI*RHO*(V2)*cos(oldTheta + oldTheta)*cos(oldTheta))*h;
+
+        v = oldV + ((kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldU
+            - (kort*cos(oldTheta)*cos(oldTheta) + kpar*sin(oldTheta)*sin(oldTheta))*oldV
+            + M_PI*RHO*(V2)*cos(oldAlpha + oldTheta)*sin(oldAlpha) - g)*h;
+    }
+    else if(oldV < 0  && condition > -M_PI && condition < 0  || oldV > 0 && condition > 0 && condition < M_PI )
+    {
+        u = oldU + (-(kort*sin(oldTheta)*sin(oldTheta) + kpar*cos(oldTheta)*cos(oldTheta))*oldU
+            + (kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldV
+            + M_PI*RHO*(V2)*cos(oldTheta + oldTheta)*cos(oldTheta))*h;
+
+        v = oldV + ((kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldU
+            - (kort*cos(oldTheta)*cos(oldTheta) + kpar*sin(oldTheta)*sin(oldTheta))*oldV
+            - M_PI*RHO*(V2)*cos(oldAlpha + oldTheta)*sin(oldAlpha) - g)*h;
+    }
 
     alpha = atan(u/v); // New movement direction
 
@@ -53,7 +71,7 @@ void Leaf::update(float h)
     //If the leaf moves too far down, push it up again.
     if(y < -10.0)
     {
-        x = fRand(-7.0f, 7.0f);      // these should be randoms
+        x = fRand(-8.0f, 8.0f);      // these should be randoms
         y = fRand(8.0f, 10.0f);
     }
 
