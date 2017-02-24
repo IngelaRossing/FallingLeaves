@@ -21,25 +21,27 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f)
 	//Values needed for rotation
     kort = 5; //fRand(1.0f, 10.0f);    // Ortogonal friction
     kpar = kort/50;     // Parallel friction
-    length = fRand(0.6f,0.9f);
+    length = fRand(0.5f,0.8f);
 
     mesh.createBox(length, length, 0.00001f);
 }
 
 void Leaf::update(float h)
 {
+    float V2 = oldU*oldU + oldV*oldV; // The magnitude of the speed of the leaf ^2
+
     u = oldU + (-(kort*sin(oldTheta)*sin(oldTheta) + kpar*cos(oldTheta)*cos(oldTheta))*oldU
            + (kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldV
-           - M_PI*RHO*(oldU*oldU + oldV*oldV)*cos(oldTheta + oldTheta)*cos(oldTheta))*h;
+           - M_PI*RHO*(V2)*cos(oldTheta + oldTheta)*cos(oldTheta))*h;
 
     v = oldV + ((kort - kpar)*sin(oldTheta)*cos(oldTheta)*oldU
            - (kort*cos(oldTheta)*cos(oldTheta) + kpar*sin(oldTheta)*sin(oldTheta))*oldV
-           + M_PI*RHO*(oldU*oldU + oldV*oldV)*cos(oldAlpha + oldTheta)*sin(oldAlpha) - g)*h;
+           + M_PI*RHO*(V2)*cos(oldAlpha + oldTheta)*sin(oldAlpha) - g)*h;
 
     alpha = atan(u/v); // New movement direction
 
     omega = oldOmega +
-           (-kort*oldOmega - (3*M_PI*RHO*(oldU*oldU + oldV*oldV)/length)*cos(oldAlpha + oldTheta)*sin(oldAlpha + oldTheta))*h;
+           (-kort*oldOmega - (3*M_PI*RHO*(V2)/length)*cos(oldAlpha + oldTheta)*sin(oldAlpha + oldTheta))*h;
 
     theta = oldTheta + oldOmega*h;
 
@@ -76,6 +78,7 @@ void Leaf::draw(MatrixStack& mStack, GLint& location_MV, float time)
         //mStack.rotY(std::min(0.0f, (float)sin(time)));
         mStack.rotZ(theta);
         mStack.rotZ(rotZ);
+        mStack.rotX(theta*0.8);
 
         glUniformMatrix4fv( location_MV, 1, GL_FALSE, mStack.getCurrentMatrix() );
         mesh.render(); //Draw the player
