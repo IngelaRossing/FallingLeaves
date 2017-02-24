@@ -8,7 +8,7 @@ float fRand(float fMin, float fMax)
 }
 
 
-Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f), oldTheta(1.0f)
+Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f)
 {
     oldX = fRand(-5.0f, 5.0f);      // these should be randoms
 	oldY = fRand(-5.0f, 10.0f);
@@ -20,10 +20,10 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0f), oldOmega(0.0f), oldAlpha(0.0f), oldTheta(1
 
 	//Values needed for rotation
     kort = 5; //fRand(1.0f, 10.0f);    // Ortogonal friction
-    kpar = kort/40;     // Parallel friction
-    length = 0.8f;
+    kpar = kort/50;     // Parallel friction
+    length = fRand(0.6f,0.9f);
 
-    mesh.createBox(0.5f, 0.5f, 0.00001f);
+    mesh.createBox(length, length, 0.00001f);
 }
 
 void Leaf::update(float h)

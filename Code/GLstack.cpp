@@ -91,7 +91,8 @@ void setupViewport(GLFWwindow *window, GLfloat *P) {
  */
 int main(int argc, char *argv[]) {
 
-	TriangleSoup leaf;
+	TriangleSoup background;
+	Texture backgroundTexture;
     Texture leafTexture;
     Shader leafShader;
 
@@ -170,15 +171,16 @@ int main(int argc, char *argv[]) {
 
     // Read the texture data from file and upload it to the GPU
 	leafTexture.createTexture("textures/testleaf3.tga");
+	backgroundTexture.createTexture("textures/blurryautumn.tga");
 
 	location_MV = glGetUniformLocation( leafShader.programID, "MV" );
 	location_P = glGetUniformLocation( leafShader.programID, "P" );
 	location_time = glGetUniformLocation( leafShader.programID, "time" );
 	location_tex = glGetUniformLocation( leafShader.programID, "tex" );
 
-    /* Here we put our classes :) */
-    const int NR_LEAVES = 100;
+	const int NR_LEAVES = 50;
     Leaf leaves[NR_LEAVES];
+    background.createBox(3.5f, 2.5f, 0.000001f);
 
     // Main loop
     while(!glfwWindowShouldClose(window))
@@ -215,6 +217,13 @@ int main(int argc, char *argv[]) {
         glUniform1f( location_time, time );
 
         // Draw the scene
+        MVstack.push();
+                MVstack.translate(0.0f, 0.0f, -7.0f);
+                glUniformMatrix4fv( location_MV, 1, GL_FALSE, MVstack.getCurrentMatrix() );
+                glBindTexture(GL_TEXTURE_2D, backgroundTexture.texID);
+                background.render();
+        MVstack.pop();
+
         MVstack.push(); // Save the initial, untouched matrix
 
             // Modify MV according to user input
@@ -225,19 +234,15 @@ int main(int argc, char *argv[]) {
             MVstack.rotY(rotator.phi);
 
             // Then, do the model transformations ("object motion")
-            MVstack.push(); // Save the current matrix on the stack
+            //MVstack.push(); // Save the current matrix on the stack
 
-                    h = (time - oldTime);
-
-                    //cout << "h =" << h << endl; //What is the step length?
-
-                    /* NOTE: För flera löv kommer det behövas en vektor eller array innehållande dess positioner och hastigheter */
-
-                    // One leaf (
+                    h = (time - oldTime); //Compute step length
 
                     oldTime = time;
 
-                    //Draw our leaf class
+                    glBindTexture(GL_TEXTURE_2D, leafTexture.texID); //Bind texture for leaves
+
+                    //Draw our leaves
                     for(int i = 0; i < NR_LEAVES; i++)
                     {
                        leaves[i].update(h);
@@ -245,8 +250,7 @@ int main(int argc, char *argv[]) {
                     }
 
 
-            MVstack.pop(); // Restore the matrix we saved above
-
+            //MVstack.pop(); // Restore the matrix we saved above
 
         MVstack.pop(); // Restore the initial, untouched matrix
 
