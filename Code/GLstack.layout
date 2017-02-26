@@ -1,44 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="default" />
-	<File name="MatrixStack.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Texture.hpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3856" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="TriangleSoup.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2185" topLine="154" />
-		</Cursor>
-	</File>
-	<File name="tnm061.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="663" topLine="78" />
-		</Cursor>
-	</File>
-	<File name="GLstack.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1197" topLine="13" />
-		</Cursor>
-	</File>
-	<File name="fragmentshader.glsl" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="208" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="Leaf.cpp" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="652" topLine="6" />
-		</Cursor>
-	</File>
-	<File name="Shader.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="80" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="tnm061.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2280" topLine="0" />
+			<Cursor1 position="372" topLine="22" />
 		</Cursor>
 	</File>
 	<File name="vertexshader.glsl" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -46,9 +12,14 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Texture.hpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Texture.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="372" topLine="22" />
+			<Cursor1 position="2434" topLine="118" />
+		</Cursor>
+	</File>
+	<File name="Shader.hpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="80" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Rotator.cpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -56,14 +27,29 @@
 			<Cursor1 position="140" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="Texture.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Rotator.hpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2434" topLine="118" />
+			<Cursor1 position="101" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="Leaf.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1123" topLine="5" />
+			<Cursor1 position="1123" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tnm061.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2280" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="tnm061.cpp" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="663" topLine="78" />
+		</Cursor>
+	</File>
+	<File name="MatrixStack.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3856" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="MatrixStack.hpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -71,14 +57,29 @@
 			<Cursor1 position="82" topLine="16" />
 		</Cursor>
 	</File>
+	<File name="TriangleSoup.cpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2185" topLine="154" />
+		</Cursor>
+	</File>
+	<File name="Leaf.cpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="416" topLine="74" />
+		</Cursor>
+	</File>
 	<File name="Shader.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3586" topLine="109" />
 		</Cursor>
 	</File>
-	<File name="Rotator.hpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="fragmentshader.glsl" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="101" topLine="0" />
+			<Cursor1 position="208" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="GLstack.cpp" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5933" topLine="163" />
 		</Cursor>
 	</File>
 	<File name="TriangleSoup.hpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">

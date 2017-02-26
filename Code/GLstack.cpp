@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Read the texture data from file and upload it to the GPU
-	leafTexture.createTexture("textures/testleaf3.tga");
+	leafTexture.createTexture("textures/symleaf.tga");
 	backgroundTexture.createTexture("textures/blurryautumn.tga");
 
 	location_MV = glGetUniformLocation( leafShader.programID, "MV" );
