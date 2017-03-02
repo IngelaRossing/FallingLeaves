@@ -24,8 +24,8 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0001f), oldOmega(0.0f), oldAlpha(0.0f)         
     length = fRand(0.5f,0.8f);
 
     //Set wind:
-    windX = 10;
-    windY = 0.5;
+    windX = 0;
+    windY = 0;
 
     mesh.createBox(length, length, 0.00001f);
 }
@@ -33,7 +33,7 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0001f), oldOmega(0.0f), oldAlpha(0.0f)         
 void Leaf::update(float h)
 {
     float condition = oldAlpha+oldTheta;    // This is used to handle whether t should be + or -
-    float V2 = oldU*oldU + oldV*oldV; // The magnitude of the speed of the leaf ^2
+    float V2 = powf(oldU, 2)+powf(oldV, 2); // The magnitude of the speed of the leaf ^2
 
     //Check condition
     if(oldAlpha+oldTheta < M_PI || oldAlpha+oldTheta > M_PI)
@@ -99,7 +99,7 @@ void Leaf::draw(MatrixStack& mStack, GLint& location_MV, float time)
         mStack.translate(x, y, z);
         //mStack.rotY(std::min(0.0f, (float)sin(time)));
         mStack.rotZ(theta);
-        mStack.rotZ(rotZ);
+        mStack.rotX(rotZ);
         mStack.rotX(theta*0.8);
 
         glUniformMatrix4fv( location_MV, 1, GL_FALSE, mStack.getCurrentMatrix() );
