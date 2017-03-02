@@ -34,6 +34,7 @@ class Leaf
         float omega, oldOmega;      // Angular velocity, derivative of theta
         float alpha, oldAlpha;      // The direction the leaf is traveling
         float rotZ;                 // Starting angle for the leaf in z
+        float windX, windY;
 
         TriangleSoup mesh;
 };

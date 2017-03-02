@@ -15,13 +15,17 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0001f), oldOmega(0.0f), oldAlpha(0.0f)         
     z    = fRand(-5.0f, 5.0f);
 
     //oldAlpha = fRand(-1.0f, 1.0f);
-    oldTheta = fRand(0.7f, 1.1f);
+    oldTheta = fRand(-1.0f, 1.1f);
     rotZ = fRand(M_PI/2-1, M_PI/2);
 
 	//Values needed for rotation
     kort = 5; //fRand(1.0f, 10.0f);    // Ortogonal friction
     kpar = kort/50;     // Parallel friction
     length = fRand(0.5f,0.8f);
+
+    //Set wind:
+    windX = 10;
+    windY = 0.5;
 
     mesh.createBox(length, length, 0.00001f);
 }
@@ -64,15 +68,15 @@ void Leaf::update(float h)
     theta = oldTheta + oldOmega*h;
 
     // The position becomes:
-    x = oldX + oldU*h;
-    y = oldY + oldV*h;
+    x = oldX + (oldU+windX)*h;
+    y = oldY + (oldV+windY)*h;
 
 
     //If the leaf moves too far down, push it up again.
     if(y < -10.0)
     {
-        x = fRand(-8.0f, 8.0f);      // these should be randoms
-        y = fRand(8.0f, 10.0f);
+        x = fRand(-20.0f, 10.0f);      // these should be randoms
+        y = fRand(6.0f, 7.0f);
     }
 
     // Update variables for nest iteration

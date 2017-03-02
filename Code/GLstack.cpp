@@ -91,6 +91,9 @@ void setupViewport(GLFWwindow *window, GLfloat *P) {
  */
 int main(int argc, char *argv[]) {
 
+    /* Here we choose the number of leaves */
+    const int NR_LEAVES = 100;
+
 	TriangleSoup background;
 	Texture backgroundTexture;
     Texture leafTexture;
@@ -178,7 +181,6 @@ int main(int argc, char *argv[]) {
 	location_time = glGetUniformLocation( leafShader.programID, "time" );
 	location_tex = glGetUniformLocation( leafShader.programID, "tex" );
 
-	const int NR_LEAVES = 50;
     Leaf leaves[NR_LEAVES];
     background.createBox(3.5f, 2.5f, 0.000001f);
 
