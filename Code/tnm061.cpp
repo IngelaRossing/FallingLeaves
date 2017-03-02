@@ -166,7 +166,7 @@ double tnm061::displayFPS(GLFWwindow *window) {
     {
         fps = (double)frames / (t-t0);
         if(frames > 0) frametime = 1000.0 * (t-t0) / frames;
-        sprintf(titlestring, "TNM061, %.2f ms/frame (%.1f FPS)", frametime, fps);
+        sprintf(titlestring, "%.2f ms/frame (%.1f FPS)", frametime, fps);
         glfwSetWindowTitle(window, titlestring);
         // printf("Speed: %.1f FPS\n", fps);
         t0 = t;
