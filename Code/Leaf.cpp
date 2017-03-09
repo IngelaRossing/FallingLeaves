@@ -22,18 +22,19 @@ Leaf::Leaf(): oldU(0.0f), oldV(0.0001f), oldOmega(0.0f), oldAlpha(0.0f)         
     kort = 5; //fRand(1.0f, 10.0f);    // Ortogonal friction
     kpar = kort/50;     // Parallel friction
     length = fRand(0.5f,0.8f);
+    //length = fRand(0.3f,0.5f);
 
     //Set wind:
-    windX = 0;
-    windY = 0;
+    windX = 10;
+    windY = 4;
 
     mesh.createBox(length, length, 0.00001f);
 }
 
-void Leaf::update(float h)
+void Leaf::update(float h, GLFWwindow *window)
 {
     float condition = oldAlpha+oldTheta;    // This is used to handle whether t should be + or -
-    float V2 = powf(oldU, 2)+powf(oldV, 2); // The magnitude of the speed of the leaf ^2
+    float V2 = oldU*oldU + oldV*oldV; // The magnitude of the speed of the leaf ^2
 
     //Check condition
     if(oldAlpha+oldTheta < M_PI || oldAlpha+oldTheta > M_PI)
@@ -68,10 +69,29 @@ void Leaf::update(float h)
     theta = oldTheta + oldOmega*h;
 
     // The position becomes:
-    x = oldX + (oldU+windX)*h;
-    y = oldY + (oldV+windY)*h;
+    //int UpArrow = 0;
+    //UpArrow = glfwGetKey(GLFW_KEY_UP);
 
+    if(glfwGetKey(window, GLFW_KEY_RIGHT)){ //Blås åt höger
+        x = oldX + (oldU+windX)*h; //Alla hastigheter är nu relativa. Vind läggs på i efterhand.
+    }
+    else if(glfwGetKey(window, GLFW_KEY_LEFT)){ //Blås åt vänster
+        x = oldX + (oldU-windX)*h;
+    }
+    else{
+        x = oldX + (oldU)*h;
+    }
 
+    if(glfwGetKey(window, GLFW_KEY_UP)){ //Blås upp
+        y = oldY + (oldV+windY)*h;
+    }
+    else if(glfwGetKey(window, GLFW_KEY_DOWN)){ //Blås ner
+        y = oldY + (oldV-windY)*h;
+    }
+    else{
+
+        y = oldY + (oldV)*h;
+    }
     //If the leaf moves too far down, push it up again.
     if(y < -10.0)
     {
@@ -99,7 +119,7 @@ void Leaf::draw(MatrixStack& mStack, GLint& location_MV, float time)
         mStack.translate(x, y, z);
         //mStack.rotY(std::min(0.0f, (float)sin(time)));
         mStack.rotZ(theta);
-        mStack.rotX(rotZ);
+        mStack.rotZ(rotZ);
         mStack.rotX(theta*0.8);
 
         glUniformMatrix4fv( location_MV, 1, GL_FALSE, mStack.getCurrentMatrix() );
