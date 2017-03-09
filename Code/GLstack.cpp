@@ -97,6 +97,8 @@ int main(int argc, char *argv[]) {
 	TriangleSoup background;
 	Texture backgroundTexture;
     Texture leafTexture;
+    Texture leafTexture2;
+    Texture leafTexture3;
     Shader leafShader;
 
  	GLint location_time, location_MV, location_P, location_tex; // Shader uniforms
@@ -104,6 +106,8 @@ int main(int argc, char *argv[]) {
 	double fps = 0.0;
 	float h;
 	float oldTime = 0.0f;
+
+	int randTex;
 
     MatrixStack MVstack; // The matrix stack we are going to use to set MV
 
@@ -173,7 +177,10 @@ int main(int argc, char *argv[]) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Read the texture data from file and upload it to the GPU
-	leafTexture.createTexture("textures/symleaf.tga");
+	leafTexture.createTexture("textures/symleafred.tga");
+	leafTexture2.createTexture("textures/symleaforange.tga");
+	leafTexture3.createTexture("textures/symleafyellow.tga");
+
 	backgroundTexture.createTexture("textures/blurryautumn.tga");
 
 	location_MV = glGetUniformLocation( leafShader.programID, "MV" );
@@ -242,13 +249,26 @@ int main(int argc, char *argv[]) {
 
                     oldTime = time;
 
-                    glBindTexture(GL_TEXTURE_2D, leafTexture.texID); //Bind texture for leaves
+
 
                     //Draw our leaves
                     for(int i = 0; i < NR_LEAVES; i++)
                     {
-                       leaves[i].update(h);
-                       leaves[i].draw(MVstack, location_MV, time);
+                        switch(i % 3)
+                        {
+                            case 0:
+                                glBindTexture(GL_TEXTURE_2D, leafTexture.texID); //Bind texture for leaves
+                                break;
+                            case 1:
+                                glBindTexture(GL_TEXTURE_2D, leafTexture2.texID); //Bind 2 texture for leaves
+                                break;
+                            default:
+                                glBindTexture(GL_TEXTURE_2D, leafTexture3.texID); //Bind 3 texture for leaves
+                        }
+
+
+                        leaves[i].update(h,window);
+                        leaves[i].draw(MVstack, location_MV, time);
                     }
 
 

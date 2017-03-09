@@ -19,7 +19,8 @@ class Leaf
     public:
         Leaf();
 
-        void update(float h);
+        //void update(float h);
+        void update(float h, GLFWwindow *window);
         void draw(MatrixStack& mStack, GLint& location_MV, float time);
 
     private:
