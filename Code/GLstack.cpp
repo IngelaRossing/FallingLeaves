@@ -92,7 +92,7 @@ void setupViewport(GLFWwindow *window, GLfloat *P) {
 int main(int argc, char *argv[]) {
 
     /* Here we choose the number of leaves */
-    const int NR_LEAVES = 100;
+    const int NR_LEAVES = 50;
 
 	TriangleSoup background;
 	Texture backgroundTexture;
@@ -106,8 +106,6 @@ int main(int argc, char *argv[]) {
 	double fps = 0.0;
 	float h;
 	float oldTime = 0.0f;
-
-	int randTex;
 
     MatrixStack MVstack; // The matrix stack we are going to use to set MV
 
@@ -129,7 +127,7 @@ int main(int argc, char *argv[]) {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Open a square window (aspect 1:1) to fill half the screen height
-    window = glfwCreateWindow(vidmode->height/2, vidmode->height/2, "GLprimer", NULL, NULL);
+    window = glfwCreateWindow(vidmode->height/2, vidmode->height/2, "FallingLeaves", NULL, NULL);
     if (!window)
     {
         glfwTerminate(); // No window was opened, so we can't continue in any useful way
@@ -243,36 +241,28 @@ int main(int argc, char *argv[]) {
             MVstack.rotY(rotator.phi);
 
             // Then, do the model transformations ("object motion")
-            //MVstack.push(); // Save the current matrix on the stack
 
-                    h = (time - oldTime); //Compute step length
+            h = (time - oldTime); //Compute step length
+            oldTime = time;
 
-                    oldTime = time;
+            //Draw our leaves
+            for(int i = 0; i < NR_LEAVES; i++)
+            {
+                switch(i % 3)
+                {
+                    case 0:
+                        glBindTexture(GL_TEXTURE_2D, leafTexture.texID); //Bind texture for leaves
+                        break;
+                    case 1:
+                        glBindTexture(GL_TEXTURE_2D, leafTexture2.texID); //Bind 2 texture for leaves
+                        break;
+                    default:
+                        glBindTexture(GL_TEXTURE_2D, leafTexture3.texID); //Bind 3 texture for leaves
+                }
 
-
-
-                    //Draw our leaves
-                    for(int i = 0; i < NR_LEAVES; i++)
-                    {
-                        switch(i % 3)
-                        {
-                            case 0:
-                                glBindTexture(GL_TEXTURE_2D, leafTexture.texID); //Bind texture for leaves
-                                break;
-                            case 1:
-                                glBindTexture(GL_TEXTURE_2D, leafTexture2.texID); //Bind 2 texture for leaves
-                                break;
-                            default:
-                                glBindTexture(GL_TEXTURE_2D, leafTexture3.texID); //Bind 3 texture for leaves
-                        }
-
-
-                        leaves[i].update(h,window);
-                        leaves[i].draw(MVstack, location_MV, time);
-                    }
-
-
-            //MVstack.pop(); // Restore the matrix we saved above
+                leaves[i].update(h,window);
+                leaves[i].draw(MVstack, location_MV, time);
+            }
 
         MVstack.pop(); // Restore the initial, untouched matrix
 
