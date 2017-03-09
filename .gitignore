@@ -1,3 +1,5 @@
 *.exe
 Code/GLstack.depend
 *.layout
+Code/.objs/GLstack.o
+*.depend

@@ -374,7 +374,7 @@
 	<cstring>
 	"TriangleSoup.hpp"
 
-1489050062 source:c:\users\emma\documents\github\fallingleaves\code\glstack.cpp
+1489057068 source:c:\users\emma\documents\github\fallingleaves\code\glstack.cpp
 	<cstdio>
 	<cstdlib>
 	<iostream>
@@ -387,7 +387,7 @@
 	"Rotator.hpp"
 	"Leaf.h"
 
-1485520822 c:\users\emma\documents\github\fallingleaves\code\glfw\glfw3.h
+1489057068 c:\users\emma\documents\github\fallingleaves\code\glfw\glfw3.h
 	<stddef.h>
 	<OpenGL/gl3.h>
 	<OpenGL/gl.h>
@@ -399,7 +399,7 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1485520823 c:\users\emma\documents\github\fallingleaves\code\gl\glext.h
+1489057068 c:\users\emma\documents\github\fallingleaves\code\gl\glext.h
 	<windows.h>
 	<stddef.h>
 	<inttypes.h>
@@ -409,46 +409,46 @@
 	<stdint.h>
 	<inttypes.h>
 
-1485520821 c:\users\emma\documents\github\fallingleaves\code\tnm061.hpp
+1489057071 c:\users\emma\documents\github\fallingleaves\code\tnm061.hpp
 	<GL/glext.h>
 
-1485520822 c:\users\emma\documents\github\fallingleaves\code\shader.hpp
+1489057068 c:\users\emma\documents\github\fallingleaves\code\shader.hpp
 	<GLFW/glfw3.h>
 	"tnm061.hpp"
 	<cstdio>
 
-1485520822 c:\users\emma\documents\github\fallingleaves\code\texture.hpp
+1489057068 c:\users\emma\documents\github\fallingleaves\code\texture.hpp
 	<GLFW/glfw3.h>
 	<cstdio>
 	<cstring>
 	<GL/glext.h>
 	"tnm061.hpp"
 
-1485520822 c:\users\emma\documents\github\fallingleaves\code\trianglesoup.hpp
+1489057068 c:\users\emma\documents\github\fallingleaves\code\trianglesoup.hpp
 	<GLFW/glfw3.h>
 	<GL/glext.h>
 	"tnm061.hpp"
 
-1485520822 c:\users\emma\documents\github\fallingleaves\code\rotator.hpp
+1489057068 c:\users\emma\documents\github\fallingleaves\code\rotator.hpp
 	<GLFW/glfw3.h>
 	<cmath>
 
-1485520822 c:\users\emma\documents\github\fallingleaves\code\matrixstack.hpp
+1489057068 c:\users\emma\documents\github\fallingleaves\code\matrixstack.hpp
 	<cmath>
 	<cstdlib>
 	<cstdio>
 	<GLFW/glfw3.h>
 
-1485520821 source:c:\users\emma\documents\github\fallingleaves\code\matrixstack.cpp
+1489057068 source:c:\users\emma\documents\github\fallingleaves\code\matrixstack.cpp
 	"MatrixStack.hpp"
 
-1485520822 source:c:\users\emma\documents\github\fallingleaves\code\rotator.cpp
+1489057068 source:c:\users\emma\documents\github\fallingleaves\code\rotator.cpp
 	"Rotator.hpp"
 
-1485520821 source:c:\users\emma\documents\github\fallingleaves\code\shader.cpp
+1489057068 source:c:\users\emma\documents\github\fallingleaves\code\shader.cpp
 	"Shader.hpp"
 
-1485520822 source:c:\users\emma\documents\github\fallingleaves\code\texture.cpp
+1489057068 source:c:\users\emma\documents\github\fallingleaves\code\texture.cpp
 	"Texture.hpp"
 
 1488460468 source:c:\users\emma\documents\github\fallingleaves\code\tnm061.cpp
@@ -457,21 +457,21 @@
 	<GL/glext.h>
 	"tnm061.hpp"
 
-1486036964 source:c:\users\emma\documents\github\fallingleaves\code\trianglesoup.cpp
+1489057068 source:c:\users\emma\documents\github\fallingleaves\code\trianglesoup.cpp
 	<cstdio>
 	<cstdlib>
 	<cmath>
 	<cstring>
 	"TriangleSoup.hpp"
 
-1489050739 c:\users\emma\documents\github\fallingleaves\code\leaf.h
+1489057068 c:\users\emma\documents\github\fallingleaves\code\leaf.h
 	"TriangleSoup.hpp"
 	"matrixStack.hpp"
 	"Shader.hpp"
 	<ctime>
 	<algorithm>
 
-1489056821 source:c:\users\emma\documents\github\fallingleaves\code\leaf.cpp
+1489057068 source:c:\users\emma\documents\github\fallingleaves\code\leaf.cpp
 	"Leaf.h"
 
 1488457133 source:c:\users\michaela\documents\github\fallingleaves\code\glstack.cpp
