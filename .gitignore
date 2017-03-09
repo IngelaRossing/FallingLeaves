@@ -4,3 +4,6 @@ Code/GLstack.depend
 Code/.objs/GLstack.o
 *.depend
 Code/GLstack.layout
+*.o
+Code/.objs/Shader.o
+*.exe
